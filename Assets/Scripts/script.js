@@ -3,7 +3,7 @@
 // generatePassword function declaration
 const generatePassword = () => {
   
-  // Initializes finishedString variable at highest scope of function for later manipulation
+  /* Initializes finishedString variable at highest scope of function for later manipulation */
   let finishedString = "";
 
   // Initial window prompt to determine password length
@@ -36,7 +36,7 @@ const generatePassword = () => {
       specialCharacters: `!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`
     };
 
-    // Variable declarations to create strings based off character combinations to pass into characterArray
+    /* Variable declarations to create strings based off character combinations and then convert into arrays to pass into characterArray -- allows randomIndex in passwordIterator() to access indexes of each character combination and compile string under finishedString */
     const fullCharacters = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
 
     const noSpecials = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
@@ -69,143 +69,161 @@ const generatePassword = () => {
     // END variable declarations
 
     /* characterArray declaration to contain different combinations for simple index access after evaluations */
-    let characterArray = [fullCharacters /* 0 */, noSpecials /* 1 */, noLowercase /* 2 */, noUppercase /* 3 */, noNumbers /* 4 */, specialsAndLowercase /* 5 */, specialsAndUppercase /* 6 */, specialsAndNumbers /* 7 */, lowercaseAndUppercase /* 8 */, lowercaseAndNumbers /* 9 */, uppercaseAndNumbers /* 10 */, specialsOnly /* 11 */, lowercaseOnly /* 12 */, uppercaseOnly /* 13 */, numbersOnly /* 14 */];
+    const characterArray = [fullCharacters /* Index: 0 */, noSpecials /* 1 */, noLowercase /* 2 */, noUppercase /* 3 */, noNumbers /* 4 */, specialsAndLowercase /* 5 */, specialsAndUppercase /* 6 */, specialsAndNumbers /* 7 */, lowercaseAndUppercase /* 8 */, lowercaseAndNumbers /* 9 */, uppercaseAndNumbers /* 10 */, specialsOnly /* 11 */, lowercaseOnly /* 12 */, uppercaseOnly /* 13 */, numbersOnly /* 14 */];
 
+    /* passwordIterator() function declaration for calling under if else evaluations. Accepts specified array based on characterArray index and specified length -- pulled from passwordLength */
     const passwordIterator = (array, inputLength) => {
+      // Ensures string is as long as passwordLength specification
       for (let i = 0; i < inputLength; i++) {
+        /* Generates random number to access random index point based on length of provided array */
         let randomIndex = Math.floor(Math.random() * array.length);
+        /* Writes value of each array value at specified index to a string and concatenates onto finishedString string */
         finishedString += array[randomIndex].toString();
       }
     }
 
-    // Boolean to determine if numbers are used
+    // Window confirm creates boolean to determine if numbers are used
     const useNumbers = window.confirm("Would you like to include numbers?");
 
-    // Boolean to determine if uppercase letters are used
+    // Window confirm creates boolean to determine if uppercase letters are used
     const useUpperCase = window.confirm("Would you like to include upper case letters?");
 
-    // Boolean to determine if lowercase letters are used
+    // Window confirm creates boolean to determine if lowercase letters are used
     const useLowerCase = window.confirm("Would you like to include lower case letters?");
 
-    // Boolean to determine if special characters are used
+    // Window confirm creates boolean to determine if special characters are used
     const useSpecialCharacters = window.confirm("Would you like to include special characters?");
 
-    // Use all characters to generate password
+    // Case: Use ALL characters to create finishedString (fullCharacters)
     if (useNumbers && 
       useUpperCase && 
       useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[0], passwordLength);
 
+    // Case: Use all characters BUT special to create finishedString (noSpecials)
     } else if (useNumbers && 
       useUpperCase && 
       useLowerCase && 
       !useSpecialCharacters) {
       passwordIterator(characterArray[1], passwordLength);
 
+    // Case: Use all characters BUT lowercase to create finishedString (noLowercase)
     } else if (useNumbers && 
       useUpperCase && 
       !useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[2], passwordLength);
 
+    // Case: Use all characters BUT uppercase to create finishedString (noUppercase) 
     } else if (useNumbers && 
       !useUpperCase && 
       useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[3], passwordLength);
 
+    // Case: Use all characters BUT numbers to create finishedString (noNumbers)
     } else if (!useNumbers && 
       useUpperCase && 
       useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[4], passwordLength);
 
+    // Case: Use special + lowercase characters to create finishedString (specialsAndLowercase)
     } else if (!useNumbers && 
       !useUpperCase && 
       useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[5], passwordLength);
 
+    // Case: Use special + uppercase characters to create finishedString (specialsAndUppercase)
     } else if (!useNumbers && 
       useUpperCase && 
       !useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[6], passwordLength);
 
+    // Case: Use special + number characters to create finishedString (specialsAndNumbers)
     } else if (useNumbers && 
       !useUpperCase && 
       !useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[7], passwordLength);
-    
+
+    // Case: Use lowercase + uppercase characters to create finishedString (lowercaseAndUppercase)
     } else if (!useNumbers && 
       useUpperCase && 
       useLowerCase && 
       !useSpecialCharacters) {
       passwordIterator(characterArray[8], passwordLength);
-    
+
+    // Case: Use special + number characters to create finishedString (lowercaseAndNumbers)
     } else if (useNumbers && 
       !useUpperCase && 
       useLowerCase && 
       !useSpecialCharacters) {
       passwordIterator(characterArray[9], passwordLength);
-    
+
+    // Case: Use uppercase + number characters to create finishedString (uppercaseAndNumbers)
     } else if (useNumbers && 
       useUpperCase && 
       !useLowerCase && 
       !useSpecialCharacters) {
       passwordIterator(characterArray[10], passwordLength);
-    
+
+    // Case: Use special characters ONLY to create finishedString (specialsOnly)
     } else if (!useNumbers && 
       !useUpperCase && 
       !useLowerCase && 
       useSpecialCharacters) {
       passwordIterator(characterArray[11], passwordLength);
-    
+
+    // Case: Use lowercase characters ONLY to create finishedString (lowercaseOnly)
     } else if (!useNumbers && 
       !useUpperCase && 
       useLowerCase && 
       !useSpecialCharacters) {
       passwordIterator(characterArray[12], passwordLength);
-    
+
+    // Case: Use uppercase characters ONLY to create finishedString (uppercaseOnly)
     } else if (!useNumbers && 
       useUpperCase && 
       !useLowerCase && 
       !useSpecialCharacters) {
       passwordIterator(characterArray[13], passwordLength);
-    
+
+    // Case: Use number characters ONLY to create finishedString (numbersOnly)
     } else if (useNumbers && 
       !useUpperCase && 
       !useLowerCase && 
       !useSpecialCharacters) {
       passwordIterator(characterArray[14], passwordLength);
 
-    // Catch all in case user says "no" to ALL options
+    /* Catch all in case user says "no" to ALL parameters (presses Cancel on all prompts after passwordLength) */
     } else {
       window.alert("No parameters specified. Please try again.");
     }
 
   }
 
-  // Ensures let password declaration under writePassword is returned a value
+  /* Ensures password variable under writePassword() is returned finishedString value to display on page */
   return finishedString;
 }
 
-// Targets generate button for later event listener assignment
-const generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
+// writePassword() declaration to write password to the page
 const writePassword = () => {
   // Calls generatePassword function for returned value
   const password = generatePassword();
 
-  // Targets text area to display generatePassword result
+  // Targets text area to display generatePassword return
   const passwordText = document.querySelector("#password");
 
   // Sets text area to display value of password variable
   passwordText.value = password;
 }
 
-// Add event listener to generate button
+// Targets generate button for later event listener assignment
+const generateBtn = document.querySelector("#generate");
+
+// Add event listener to generate button -- runs on page load
 generateBtn.addEventListener("click", writePassword);

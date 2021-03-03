@@ -1,30 +1,13 @@
-// Assignment Code
+// Password Generator Logic
 
-// Targets generate button for later event listener assignment
-let generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  // Calls generatePassword function for returned value
-  let password = generatePassword();
-
-  // Targets text area to display generatePassword result
-  let passwordText = document.querySelector("#password");
-
-  // 
-  passwordText.value = password;
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
-function generatePassword() {
+// generatePassword function declaration
+const generatePassword = () => {
   
-  // Initializes finishedString variable at highest scope for later manipulation
+  // Initializes finishedString variable at highest scope of function for later manipulation
   let finishedString = "";
   
   // characterLibrary object to contain base character sets
-  let characterLibrary = {
+  const characterLibrary = {
     numbers: `0123456789`,
     lowercaseLetters: `abcdefghiklmnopqrstuvwxyz`,
     uppercaseLetters: `ABCDEFGHIJKLMNOPQRSTUVWXTZ`,
@@ -32,35 +15,35 @@ function generatePassword() {
   };
 
   // Variable declarations to create strings based off character combinations to pass into characterArray
-  let fullCharacters = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
+  const fullCharacters = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
 
-  let noSpecials = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
+  const noSpecials = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
 
-  let noLowercase = (characterLibrary.numbers + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
+  const noLowercase = (characterLibrary.numbers + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
 
-  let noUppercase = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.specialCharacters).split("");
+  const noUppercase = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.specialCharacters).split("");
 
-  let noNumbers = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
+  const noNumbers = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
 
-  let specialsAndLowercase = (characterLibrary.specialCharacters + characterLibrary.lowercaseLetters).split("");
+  const specialsAndLowercase = (characterLibrary.specialCharacters + characterLibrary.lowercaseLetters).split("");
 
-  let specialsAndUppercase = (characterLibrary.specialCharacters + characterLibrary.uppercaseLetters).split("");
+  const specialsAndUppercase = (characterLibrary.specialCharacters + characterLibrary.uppercaseLetters).split("");
 
-  let specialsAndNumbers = (characterLibrary.specialCharacters + characterLibrary.numbers).split("");
+  const specialsAndNumbers = (characterLibrary.specialCharacters + characterLibrary.numbers).split("");
 
-  let lowercaseAndUppercase = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
+  const lowercaseAndUppercase = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
 
-  let lowercaseAndNumbers = (characterLibrary.lowercaseLetters + characterLibrary.numbers).split("");
+  const lowercaseAndNumbers = (characterLibrary.lowercaseLetters + characterLibrary.numbers).split("");
 
-  let uppercaseAndNumbers = (characterLibrary.uppercaseLetters + characterLibrary.numbers).split("");
+  const uppercaseAndNumbers = (characterLibrary.uppercaseLetters + characterLibrary.numbers).split("");
 
-  let specialsOnly = characterLibrary.specialCharacters.split("");
+  const specialsOnly = characterLibrary.specialCharacters.split("");
 
-  let lowercaseOnly = characterLibrary.lowercaseLetters.split("");
+  const lowercaseOnly = characterLibrary.lowercaseLetters.split("");
 
-  let uppercaseOnly = characterLibrary.uppercaseLetters.split("");
+  const uppercaseOnly = characterLibrary.uppercaseLetters.split("");
 
-  let numbersOnly = characterLibrary.numbers.split("");
+  const numbersOnly = characterLibrary.numbers.split("");
   // END variable declarations
 
   /* characterArray declaration to contain different combinations for simple index access after evaluations */
@@ -88,7 +71,7 @@ function generatePassword() {
   ) {
     passwordLength = Number(passwordLength);
 
-    let passwordIterator = (array, inputLength) => {
+    const passwordIterator = (array, inputLength) => {
       for (let i = 0; i < inputLength; i++) {
         let randomIndex = Math.floor(Math.random() * array.length);
         finishedString += array[randomIndex].toString();
@@ -96,16 +79,16 @@ function generatePassword() {
     }
 
     // Boolean to determine if numbers are used
-    let useNumbers = window.confirm("Would you like to include numbers?");
+    const useNumbers = window.confirm("Would you like to include numbers?");
 
     // Boolean to determine if uppercase letters are used
-    let useUpperCase = window.confirm("Would you like to include upper case letters?");
+    const useUpperCase = window.confirm("Would you like to include upper case letters?");
 
     // Boolean to determine if lowercase letters are used
-    let useLowerCase = window.confirm("Would you like to include lower case letters?");
+    const useLowerCase = window.confirm("Would you like to include lower case letters?");
 
     // Boolean to determine if special characters are used
-    let useSpecialCharacters = window.confirm("Would you like to include special characters?");
+    const useSpecialCharacters = window.confirm("Would you like to include special characters?");
 
     // Use all characters to generate password
     if (useNumbers && 
@@ -208,3 +191,21 @@ function generatePassword() {
   // Ensures let password declaration under writePassword is returned a value
   return finishedString;
 }
+
+// Targets generate button for later event listener assignment
+const generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+const writePassword = () => {
+  // Calls generatePassword function for returned value
+  const password = generatePassword();
+
+  // Targets text area to display generatePassword result
+  const passwordText = document.querySelector("#password");
+
+  // Sets text area to display value of password variable
+  passwordText.value = password;
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);

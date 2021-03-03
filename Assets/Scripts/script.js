@@ -5,49 +5,6 @@ const generatePassword = () => {
   
   // Initializes finishedString variable at highest scope of function for later manipulation
   let finishedString = "";
-  
-  // characterLibrary object to contain base character sets
-  const characterLibrary = {
-    numbers: `0123456789`,
-    lowercaseLetters: `abcdefghiklmnopqrstuvwxyz`,
-    uppercaseLetters: `ABCDEFGHIJKLMNOPQRSTUVWXTZ`,
-    specialCharacters: `!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`
-  };
-
-  // Variable declarations to create strings based off character combinations to pass into characterArray
-  const fullCharacters = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
-
-  const noSpecials = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
-
-  const noLowercase = (characterLibrary.numbers + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
-
-  const noUppercase = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.specialCharacters).split("");
-
-  const noNumbers = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
-
-  const specialsAndLowercase = (characterLibrary.specialCharacters + characterLibrary.lowercaseLetters).split("");
-
-  const specialsAndUppercase = (characterLibrary.specialCharacters + characterLibrary.uppercaseLetters).split("");
-
-  const specialsAndNumbers = (characterLibrary.specialCharacters + characterLibrary.numbers).split("");
-
-  const lowercaseAndUppercase = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
-
-  const lowercaseAndNumbers = (characterLibrary.lowercaseLetters + characterLibrary.numbers).split("");
-
-  const uppercaseAndNumbers = (characterLibrary.uppercaseLetters + characterLibrary.numbers).split("");
-
-  const specialsOnly = characterLibrary.specialCharacters.split("");
-
-  const lowercaseOnly = characterLibrary.lowercaseLetters.split("");
-
-  const uppercaseOnly = characterLibrary.uppercaseLetters.split("");
-
-  const numbersOnly = characterLibrary.numbers.split("");
-  // END variable declarations
-
-  /* characterArray declaration to contain different combinations for simple index access after evaluations */
-  let characterArray = [fullCharacters /* 0 */, noSpecials /* 1 */, noLowercase /* 2 */, noUppercase /* 3 */, noNumbers /* 4 */, specialsAndLowercase /* 5 */, specialsAndUppercase /* 6 */, specialsAndNumbers /* 7 */, lowercaseAndUppercase /* 8 */, lowercaseAndNumbers /* 9 */, uppercaseAndNumbers /* 10 */, specialsOnly /* 11 */, lowercaseOnly /* 12 */, uppercaseOnly /* 13 */, numbersOnly /* 14 */];
 
   // Initial window prompt to determine password length
   let passwordLength = window.prompt("Enter how long you would like your password: 8-128 characters");
@@ -70,6 +27,49 @@ const generatePassword = () => {
       (Number(passwordLength) <= 128)
   ) {
     passwordLength = Number(passwordLength);
+
+    // characterLibrary object to contain base character sets
+    const characterLibrary = {
+      numbers: `0123456789`,
+      lowercaseLetters: `abcdefghiklmnopqrstuvwxyz`,
+      uppercaseLetters: `ABCDEFGHIJKLMNOPQRSTUVWXTZ`,
+      specialCharacters: `!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`
+    };
+
+    // Variable declarations to create strings based off character combinations to pass into characterArray
+    const fullCharacters = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
+
+    const noSpecials = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
+
+    const noLowercase = (characterLibrary.numbers + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
+
+    const noUppercase = (characterLibrary.numbers + characterLibrary.lowercaseLetters + characterLibrary.specialCharacters).split("");
+
+    const noNumbers = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters + characterLibrary.specialCharacters).split("");
+
+    const specialsAndLowercase = (characterLibrary.specialCharacters + characterLibrary.lowercaseLetters).split("");
+
+    const specialsAndUppercase = (characterLibrary.specialCharacters + characterLibrary.uppercaseLetters).split("");
+
+    const specialsAndNumbers = (characterLibrary.specialCharacters + characterLibrary.numbers).split("");
+
+    const lowercaseAndUppercase = (characterLibrary.lowercaseLetters + characterLibrary.uppercaseLetters).split("");
+
+    const lowercaseAndNumbers = (characterLibrary.lowercaseLetters + characterLibrary.numbers).split("");
+
+    const uppercaseAndNumbers = (characterLibrary.uppercaseLetters + characterLibrary.numbers).split("");
+
+    const specialsOnly = characterLibrary.specialCharacters.split("");
+
+    const lowercaseOnly = characterLibrary.lowercaseLetters.split("");
+
+    const uppercaseOnly = characterLibrary.uppercaseLetters.split("");
+
+    const numbersOnly = characterLibrary.numbers.split("");
+    // END variable declarations
+
+    /* characterArray declaration to contain different combinations for simple index access after evaluations */
+    let characterArray = [fullCharacters /* 0 */, noSpecials /* 1 */, noLowercase /* 2 */, noUppercase /* 3 */, noNumbers /* 4 */, specialsAndLowercase /* 5 */, specialsAndUppercase /* 6 */, specialsAndNumbers /* 7 */, lowercaseAndUppercase /* 8 */, lowercaseAndNumbers /* 9 */, uppercaseAndNumbers /* 10 */, specialsOnly /* 11 */, lowercaseOnly /* 12 */, uppercaseOnly /* 13 */, numbersOnly /* 14 */];
 
     const passwordIterator = (array, inputLength) => {
       for (let i = 0; i < inputLength; i++) {

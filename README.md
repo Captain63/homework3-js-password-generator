@@ -11,4 +11,4 @@ Once window.confirms determine parameters of password, multiple if/else statemen
 https://captain63.github.io/homework3-js-password-generator/
 
 ## Screenshot
-![Screenshot of application interface with generated 60-character password of full characters: lowercase, uppercase, specials, numbers.](./Assets/Images/completed-application.PNG)
+![Screenshot of application interface with generated 60-character password of full characters: lowercase, uppercase, specials, numbers.](./Assets/Images/completed-application-1.PNG)
